@@ -1,9 +1,10 @@
-name: mpflutter_template
+name: analog_clock
 description: A new MPFlutter project.
+author: furkantektas
 publish_to: "none"
 version: 1.0.0+1
 playbox:
-  name: 模板工程
+  name: AnalogClock
   description: 
   icon: school
   background: blue

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:mpcore/mpcore.dart';
-import 'package:mpflutter_template/second_page.dart';
+
+import 'analog_clock.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,6 @@ class MyApp extends StatelessWidget {
       color: Colors.blue,
       routes: {
         '/': (context) => MyHomePage(),
-        '/second': (context) => MySecondPage(),
       },
       navigatorObservers: [MPCore.getNavigationObserver()],
     );
@@ -26,25 +26,32 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MPScaffold(
-      name: 'Template',
-      body: Center(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed('/second');
-          },
+      name: 'Analog Clock',
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.amberAccent, Colors.amber],
+          ),
+        ),
+        child: Center(
           child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.blue,
-            child: Center(
-              child: Text(
-                'Hello, MPFlutter!',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
+            width: 300,
+            height: 300,
+            child: AnalogClock(
+              width: 300.0,
+              height: 300.0,
+              isLive: true,
+              hourHandColor: Colors.black,
+              minuteHandColor: Colors.black,
+              showSecondHand: true,
+              numberColor: Colors.black87,
+              showNumbers: true,
+              textScaleFactor: 1.4,
+              showTicks: true,
+              tickColor: Colors.black,
+              showDigitalClock: true,
             ),
           ),
         ),
