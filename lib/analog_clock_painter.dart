@@ -109,16 +109,14 @@ class AnalogClockPainter extends CustomPainter {
         tp = _textPainterCache[h.toString()]!;
       } else {
         tp = MPTextPainter();
-        _textPainterCache[h.toString()] = tp;
         tp.text = span;
         await tp.layout(maxWidth: 300);
+        _textPainterCache[h.toString()] = tp;
       }
-      final os =
-          size.center(offset - tp.size.center(Offset.zero)).translate(0, 6);
-      tp.paint(
-        canvas,
-        os,
-      );
+      final os = size
+          .center(offset - tp.size.center(Offset.zero))
+          .translate(0, tp.size.height / 2.0);
+      tp.paint(canvas, os);
     }
   }
 
