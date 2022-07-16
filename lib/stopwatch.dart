@@ -250,8 +250,9 @@ class _WacthSurfaceState extends State<WacthSurface> {
   }
 
   void _setupTimer() {
-    _timer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    _timer = Timer.periodic(Duration(milliseconds: 32), (timer) {
       if (widget.startTime == null) return;
+      if (!widget.started) return;
       setState(() {
         _currentTime = DateTime.now().difference(widget.startTime!);
       });
@@ -262,9 +263,12 @@ class _WacthSurfaceState extends State<WacthSurface> {
   Widget build(BuildContext context) {
     final m = _currentTime.inMinutes.toString().padLeft(2, '0');
     final s = (_currentTime.inSeconds % 60).toString().padLeft(2, '0');
-    final ms = ((_currentTime.inMilliseconds % 1000) / 10)
+    var ms = ((_currentTime.inMilliseconds % 1000) / 10)
         .toStringAsFixed(0)
         .padLeft(2, '0');
+    if (ms.length >= 3) {
+      ms = "99";
+    }
     return Container(
       height: 72,
       child: MPText(
